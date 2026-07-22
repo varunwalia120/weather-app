@@ -1,14 +1,32 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { FiSearch } from "react-icons/fi";
 
-const SearchBar = () => {
+type SearchBarProps = {
+  onSearch: (city: string) => void;
+};
+
+const SearchBar = ({ onSearch }: SearchBarProps) => {
+  const [city, setCity] = useState("");
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const trimmedCity = city.trim();
+
+    if (!trimmedCity) return;
+
+    onSearch(trimmedCity);
+    setCity("");
+  };
+
   return (
     <motion.form
       initial={{ opacity: 0, y: 25 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.15, duration: 0.5 }}
       className="mx-auto mt-8 flex w-full max-w-2xl items-center gap-3"
-      onSubmit={(e) => e.preventDefault()}
+      onSubmit={handleSubmit}
     >
       <div className="relative flex-1">
         <FiSearch
@@ -18,15 +36,17 @@ const SearchBar = () => {
 
         <input
           type="text"
+          value={city}
+          onChange={(e) => setCity(e.target.value)}
           placeholder="Search for a city..."
           className="w-full rounded-2xl border border-white/10 bg-white/10 py-4 pl-12 pr-4 text-white placeholder:text-slate-400 backdrop-blur-xl outline-none transition-all duration-300 focus:border-sky-400 focus:ring-2 focus:ring-sky-400/30"
         />
       </div>
 
       <motion.button
+        type="submit"
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.96 }}
-        type="submit"
         className="rounded-2xl bg-sky-500 px-6 py-4 font-semibold text-white shadow-lg transition-colors duration-300 hover:bg-sky-600"
       >
         Search
