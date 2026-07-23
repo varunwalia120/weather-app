@@ -4,23 +4,24 @@ import SearchBar from "./components/search/SearchBar";
 import WeatherCard from "./components/weather/WeatherCard";
 import { getWeatherByCity } from "./services/weatherApi";
 import type { WeatherResponse } from "./types/weather";
+import EmptyState from "./components/common/EmptyState";
 
 function App() {
   const [weather, setWeather] = useState<WeatherResponse | null>(null);
 
-const handleSearch = async (city: string) => {
-  try {
-    console.log("Searching:", city);
+  const handleSearch = async (city: string) => {
+    try {
+      console.log("Searching:", city);
 
-    const data = await getWeatherByCity(city);
+      const data = await getWeatherByCity(city);
 
-    console.log(data);
+      console.log(data);
 
-    setWeather(data);
-  } catch (error) {
-    console.error(error);
-  }
-};
+      setWeather(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <main className="min-h-screen bg-slate-950 px-5">
@@ -28,7 +29,7 @@ const handleSearch = async (city: string) => {
 
       <SearchBar onSearch={handleSearch} />
 
-      {weather && <WeatherCard weather={weather} />}
+      {!weather ? <EmptyState /> : <WeatherCard weather={weather} />}
     </main>
   );
 }
