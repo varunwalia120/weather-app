@@ -4,7 +4,7 @@ import {
   FaTemperatureHigh,
   FaEye,
 } from "react-icons/fa";
-import { WiBarometer } from "react-icons/wi";
+import { WiBarometer, WiSunrise, WiSunset } from "react-icons/wi";
 
 type WeatherDetailsProps = {
   humidity: number;
@@ -12,6 +12,8 @@ type WeatherDetailsProps = {
   pressure: number;
   feelsLike: number;
   visibility: number;
+  sunrise: number;
+  sunset: number;
 };
 
 const WeatherDetails = ({
@@ -20,7 +22,16 @@ const WeatherDetails = ({
   pressure,
   feelsLike,
   visibility,
+  sunrise,
+  sunset,
 }: WeatherDetailsProps) => {
+  const formatTime = (timestamp: number) => {
+    return new Date(timestamp * 1000).toLocaleTimeString([], {
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+  };
+
   const items = [
     {
       icon: <FaTemperatureHigh className="text-2xl text-orange-400" />,
@@ -46,6 +57,16 @@ const WeatherDetails = ({
       icon: <FaEye className="text-2xl text-purple-400" />,
       title: "Visibility",
       value: `${visibility / 1000} km`,
+    },
+    {
+      icon: <WiSunrise className="text-3xl text-amber-400" />,
+      title: "Sunrise",
+      value: formatTime(sunrise),
+    },
+    {
+      icon: <WiSunset className="text-3xl text-orange-500" />,
+      title: "Sunset",
+      value: formatTime(sunset),
     },
   ];
 

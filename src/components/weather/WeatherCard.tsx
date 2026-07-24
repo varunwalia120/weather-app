@@ -43,6 +43,8 @@ const WeatherCard = ({ weather }: WeatherCardProps) => {
         pressure={weather.main.pressure}
         feelsLike={weather.main.feels_like}
         visibility={weather.visibility}
+        sunrise={weather.sys.sunrise}
+        sunset={weather.sys.sunset}
       />
     </motion.section>
   );
