@@ -1,24 +1,28 @@
 export interface WeatherResponse {
-    name: string;
+  name: string;
 
-    main: {
-        temp: number;
-        feels_like: number;
-        humidity: number;
-        pressure: number;
-    };
+  main: {
+    temp: number;
+    feels_like: number;
+    humidity: number;
+    pressure: number;
+  };
 
-    wind: {
-        speed: number;
-    };
+  weather: {
+    main: string;
+    description: string;
+    icon: string;
+  }[];
 
-    weather: {
-        main: string;
-        description: string;
-        icon: string;
-    }[];
+  wind: {
+    speed: number;
+  };
 
-    sys: {
-        country: string;
-    };
+  visibility: number;
+
+  sys: {
+    country: string;
+    sunrise: number;
+    sunset: number;
+  };
 }
