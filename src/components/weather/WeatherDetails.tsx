@@ -71,11 +71,11 @@ const WeatherDetails = ({
   ];
 
   return (
-    <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+    <div className="mt-10 grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
       {items.map((item) => (
         <div
           key={item.title}
-          className="rounded-2xl border border-white/10 bg-white/5 p-5 text-center transition-all duration-300 hover:-translate-y-1 hover:bg-white/10"
+          className="rounded-3xl border border-white/10 bg-white/5 p-6 text-center transition-all duration-300 hover:-translate-y-2 hover:scale-105 hover:border-sky-400/40 hover:bg-white/10"
         >
           <div className="mb-3 flex justify-center">
             {item.icon}
