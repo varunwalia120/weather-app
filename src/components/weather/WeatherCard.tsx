@@ -29,9 +29,7 @@ const WeatherCard = ({ weather }: WeatherCardProps) => {
 
         <h3 className="mt-4 text-3xl font-semibold text-white">
           {weather.name},{" "}
-          <span className="text-sky-400">
-            {weather.sys.country}
-          </span>
+          <span className="text-sky-400">{weather.sys.country}</span>
         </h3>
 
         <p className="mt-2 text-lg capitalize text-slate-300">
@@ -43,6 +41,8 @@ const WeatherCard = ({ weather }: WeatherCardProps) => {
         humidity={weather.main.humidity}
         wind={weather.wind.speed}
         pressure={weather.main.pressure}
+        feelsLike={weather.main.feels_like}
+        visibility={weather.visibility}
       />
     </motion.section>
   );
