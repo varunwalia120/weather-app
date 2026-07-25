@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { FiClock } from "react-icons/fi";
 
 type SearchHistoryProps = {
   history: string[];
@@ -12,27 +13,32 @@ const SearchHistory = ({
   if (history.length === 0) return null;
 
   return (
-    <motion.div
+    <motion.section
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       className="mx-auto mt-6 w-full max-w-2xl"
     >
-      <h3 className="mb-3 text-sm font-medium text-slate-400">
-        Recent Searches
-      </h3>
+      <div className="mb-3 flex items-center gap-2">
+        <FiClock className="text-sky-400" />
+        <h3 className="text-sm font-medium text-slate-400">
+          Recent Searches
+        </h3>
+      </div>
 
-      <div className="flex flex-wrap gap-3">
+      <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
         {history.map((city) => (
-          <button
+          <motion.button
             key={city}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
             onClick={() => onSelect(city)}
-            className="rounded-full border border-white/10 bg-white/10 px-4 py-2 text-sm text-white transition-all duration-300 hover:border-sky-400 hover:bg-sky-500/20"
+            className="whitespace-nowrap rounded-full border border-white/10 bg-white/10 px-4 py-2 text-sm font-medium text-white transition-all duration-300 hover:border-sky-400 hover:bg-sky-500/20 hover:text-sky-300"
           >
             {city}
-          </button>
+          </motion.button>
         ))}
       </div>
-    </motion.div>
+    </motion.section>
   );
 };
 
