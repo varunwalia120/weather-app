@@ -8,8 +8,13 @@ import EmptyState from "./components/common/EmptyState";
 import Loading from "./components/common/Loading";
 import ErrorMessage from "./components/common/ErrorMessage";
 
-import { getWeatherByCity } from "./services/weatherApi";
 import type { WeatherResponse } from "./types/weather";
+
+import LocationButton from "./components/search/LocationButton";
+import {
+  getWeatherByCity,
+  getWeatherByCoordinates,
+} from "./services/weatherApi";
 
 function App() {
   const [weather, setWeather] = useState<WeatherResponse | null>(null);
@@ -43,17 +48,12 @@ function App() {
 
       const updatedHistory = [
         city,
-        ...history.filter(
-          (item) => item.toLowerCase() !== normalizedCity
-        ),
+        ...history.filter((item) => item.toLowerCase() !== normalizedCity),
       ].slice(0, 5);
 
       setHistory(updatedHistory);
 
-      localStorage.setItem(
-        "searchHistory",
-        JSON.stringify(updatedHistory)
-      );
+      localStorage.setItem("searchHistory", JSON.stringify(updatedHistory));
     } catch (err) {
       if (err instanceof Error) {
         setError(err.message);
@@ -67,16 +67,54 @@ function App() {
     }
   };
 
+  const handleCurrentLocation = () => {
+    if (!navigator.geolocation) {
+      setError("Geolocation is not supported by your browser.");
+      return;
+    }
+
+    setLoading(true);
+    setError("");
+
+    navigator.geolocation.getCurrentPosition(
+      async (position) => {
+        try {
+          const data = await getWeatherByCoordinates(
+            position.coords.latitude,
+            position.coords.longitude,
+          );
+
+          setWeather(data);
+        } catch (err) {
+          if (err instanceof Error) {
+            setError(err.message);
+          } else {
+            setError("Unable to fetch weather.");
+          }
+        } finally {
+          setLoading(false);
+        }
+      },
+      () => {
+        setLoading(false);
+        setError("Location permission denied.");
+      },
+    );
+  };
+
   return (
     <main className="min-h-screen bg-slate-950 px-5">
       <Navbar />
 
-      <SearchBar onSearch={handleSearch} />
+      <div className="mx-auto mt-6 w-full max-w-2xl">
+        <SearchBar onSearch={handleSearch} />
 
-      <SearchHistory
-        history={history}
-        onSelect={handleSearch}
-      />
+        <div className="mt-4 flex justify-center">
+          <LocationButton onLocationClick={handleCurrentLocation} />
+        </div>
+
+        <SearchHistory history={history} onSelect={handleSearch} />
+      </div>
 
       {loading ? (
         <Loading />

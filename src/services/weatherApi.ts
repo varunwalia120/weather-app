@@ -34,3 +34,28 @@ export const getWeatherByCity = async (
     throw new Error("Something went wrong.");
   }
 };
+
+// 👇 Add this below getWeatherByCity
+export const getWeatherByCoordinates = async (
+  lat: number,
+  lon: number
+): Promise<WeatherResponse> => {
+  try {
+    const response = await axios.get<WeatherResponse>(BASE_URL, {
+      params: {
+        lat,
+        lon,
+        appid: API_KEY,
+        units: "metric",
+      },
+    });
+
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      throw new Error("Unable to fetch weather for your location.");
+    }
+
+    throw new Error("Something went wrong.");
+  }
+};
