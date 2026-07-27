@@ -11,44 +11,38 @@ const WeatherCard = ({ weather }: WeatherCardProps) => {
 
   const weatherType = weather.weather[0].main.toLowerCase();
 
-  const animationVariants = {
-    clear: {
-      y: [0, -6, 0],
-      scale: [1, 1.02, 1],
-    },
-    clouds: {
-      y: [0, -4, 0],
-    },
-    rain: {
-      y: [0, 4, 0],
-    },
-    drizzle: {
-      y: [0, 4, 0],
-    },
-    snow: {
-      y: [0, -8, 0],
-    },
-    thunderstorm: {
-      scale: [1, 1.01, 1],
-    },
-  };
+  const today = new Date().toLocaleDateString(undefined, {
+    weekday: "long",
+    day: "numeric",
+    month: "long",
+  });
 
   return (
     <motion.section
-  initial={{ opacity: 0, y: 35 }}
-  animate={{ opacity: 1, y: 0 }}
-  transition={{ duration: 0.6 }}
-  whileHover={{ scale: 1.01 }}
-  className="mx-auto mt-12 w-full max-w-5xl overflow-hidden rounded-3xl border border-white/10 bg-white/10 p-10 shadow-2xl backdrop-blur-xl"
->
-      <div className="flex flex-col items-center border-b border-white/10 pb-8">
+      initial={{ opacity: 0, y: 35 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6 }}
+      whileHover={{ scale: 1.01 }}
+      className="mx-auto mt-10 w-full max-w-5xl overflow-hidden rounded-[32px] border border-white/10 bg-white/10 p-12 shadow-[0_25px_60px_rgba(0,0,0,0.35)] backdrop-blur-2xl"
+    >
+      <div className="flex flex-col items-center border-b border-white/10 pb-10">
         <motion.img
           src={iconUrl}
           alt={weather.weather[0].description}
-          className="h-40 w-40"
+          className="h-52 w-52 drop-shadow-2xl"
           animate={{
             rotate: weatherType === "clear" ? [0, 5, -5, 0] : 0,
             scale: weatherType === "snow" ? [1, 1.05, 1] : 1,
+            y:
+              weatherType === "clouds"
+                ? [0, -6, 0]
+                : weatherType === "rain"
+                ? [0, 5, 0]
+                : weatherType === "drizzle"
+                ? [0, 5, 0]
+                : weatherType === "clear"
+                ? [0, -5, 0]
+                : 0,
           }}
           transition={{
             duration: 5,
@@ -57,19 +51,23 @@ const WeatherCard = ({ weather }: WeatherCardProps) => {
           }}
         />
 
-        <h1 className="text-9xl font-black tracking-tight text-white">
+        <h1 className="mt-2 text-8xl font-extrabold tracking-tight text-white">
           {Math.round(weather.main.temp)}°
         </h1>
 
-        <h2 className="mt-2 text-4xl font-bold text-white">
+        <h2 className="mt-3 text-5xl font-bold tracking-tight text-white">
           {weather.name}
         </h2>
 
-        <p className="text-lg font-medium text-sky-400">
+        <p className="mt-1 text-xl font-semibold text-sky-400">
           {weather.sys.country}
         </p>
 
-        <p className="mt-4 rounded-full bg-sky-500/10 px-5 py-2 capitalize text-sky-300">
+        <p className="mt-3 text-slate-400">
+          {today}
+        </p>
+
+        <p className="mt-6 rounded-full bg-sky-500/15 px-6 py-2 text-lg font-medium capitalize text-sky-300">
           {weather.weather[0].description}
         </p>
       </div>
