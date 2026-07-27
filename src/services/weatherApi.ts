@@ -6,14 +6,15 @@ const BASE_URL = "https://api.openweathermap.org/data/2.5/weather";
 const API_KEY = import.meta.env.VITE_WEATHER_API_KEY;
 
 export const getWeatherByCity = async (
-  city: string
+  city: string,
+  unit: "metric" | "imperial" = "metric"
 ): Promise<WeatherResponse> => {
   try {
     const response = await axios.get<WeatherResponse>(BASE_URL, {
       params: {
         q: city,
         appid: API_KEY,
-        units: "metric",
+        units: unit,
       },
     });
 
@@ -38,7 +39,8 @@ export const getWeatherByCity = async (
 // 👇 Add this below getWeatherByCity
 export const getWeatherByCoordinates = async (
   lat: number,
-  lon: number
+  lon: number,
+  unit: "metric" | "imperial" = "metric"
 ): Promise<WeatherResponse> => {
   try {
     const response = await axios.get<WeatherResponse>(BASE_URL, {
@@ -46,7 +48,7 @@ export const getWeatherByCoordinates = async (
         lat,
         lon,
         appid: API_KEY,
-        units: "metric",
+        units: unit,
       },
     });
 
