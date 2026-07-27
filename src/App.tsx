@@ -46,7 +46,7 @@ function App() {
       const data = await getWeatherByCity(city, unit);
 
       setWeather(data);
-      
+
       setLastSearchedCity(normalizedCity);
 
       const updatedHistory = [
@@ -111,8 +111,9 @@ function App() {
   };
 
   return (
-    <main className="min-h-screen bg-slate-950 px-5">
-      <Navbar />
+    <main className="min-h-screen bg-slate-950 px-6 pb-16">
+      <div className="mx-auto max-w-6xl">
+        <Navbar />
 
       <div className="mx-auto mt-6 w-full max-w-2xl">
         <SearchBar onSearch={handleSearch} />
@@ -137,6 +138,7 @@ function App() {
       ) : (
         <EmptyState />
       )}
+      </div>
     </main>
   );
 }

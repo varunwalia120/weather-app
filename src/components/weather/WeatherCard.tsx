@@ -39,7 +39,7 @@ const WeatherCard = ({ weather }: WeatherCardProps) => {
   animate={{ opacity: 1, y: 0 }}
   transition={{ duration: 0.6 }}
   whileHover={{ scale: 1.01 }}
-  className="mx-auto mt-12 w-full max-w-4xl overflow-hidden rounded-3xl border border-white/10 bg-white/10 p-8 shadow-2xl backdrop-blur-xl"
+  className="mx-auto mt-12 w-full max-w-5xl overflow-hidden rounded-3xl border border-white/10 bg-white/10 p-10 shadow-2xl backdrop-blur-xl"
 >
       <div className="flex flex-col items-center border-b border-white/10 pb-8">
         <motion.img
@@ -57,7 +57,7 @@ const WeatherCard = ({ weather }: WeatherCardProps) => {
           }}
         />
 
-        <h1 className="text-8xl font-black tracking-tight text-white">
+        <h1 className="text-9xl font-black tracking-tight text-white">
           {Math.round(weather.main.temp)}°
         </h1>
 
