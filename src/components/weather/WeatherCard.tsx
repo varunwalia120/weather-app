@@ -9,18 +9,52 @@ type WeatherCardProps = {
 const WeatherCard = ({ weather }: WeatherCardProps) => {
   const iconUrl = `https://openweathermap.org/img/wn/${weather.weather[0].icon}@4x.png`;
 
+  const weatherType = weather.weather[0].main.toLowerCase();
+
+  const animationVariants = {
+    clear: {
+      y: [0, -6, 0],
+      scale: [1, 1.02, 1],
+    },
+    clouds: {
+      y: [0, -4, 0],
+    },
+    rain: {
+      y: [0, 4, 0],
+    },
+    drizzle: {
+      y: [0, 4, 0],
+    },
+    snow: {
+      y: [0, -8, 0],
+    },
+    thunderstorm: {
+      scale: [1, 1.01, 1],
+    },
+  };
+
   return (
     <motion.section
-      initial={{ opacity: 0, y: 35 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6 }}
-      className="mx-auto mt-12 w-full max-w-4xl overflow-hidden rounded-3xl border border-white/10 bg-white/10 p-8 shadow-2xl backdrop-blur-xl"
-    >
+  initial={{ opacity: 0, y: 35 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.6 }}
+  whileHover={{ scale: 1.01 }}
+  className="mx-auto mt-12 w-full max-w-4xl overflow-hidden rounded-3xl border border-white/10 bg-white/10 p-8 shadow-2xl backdrop-blur-xl"
+>
       <div className="flex flex-col items-center border-b border-white/10 pb-8">
-        <img
+        <motion.img
           src={iconUrl}
           alt={weather.weather[0].description}
           className="h-40 w-40"
+          animate={{
+            rotate: weatherType === "clear" ? [0, 5, -5, 0] : 0,
+            scale: weatherType === "snow" ? [1, 1.05, 1] : 1,
+          }}
+          transition={{
+            duration: 5,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
         />
 
         <h1 className="text-8xl font-black tracking-tight text-white">
