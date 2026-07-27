@@ -10,6 +10,7 @@ import ErrorMessage from "./components/common/ErrorMessage";
 
 import type { WeatherResponse } from "./types/weather";
 import UnitToggle from "./components/common/UnitToggle";
+import { getBackground } from "./utils/background";
 
 import LocationButton from "./components/search/LocationButton";
 import {
@@ -129,8 +130,14 @@ function App() {
     }
   };
 
+  const backgroundClass = weather
+    ? getBackground(weather.weather[0].main)
+    : "bg-slate-950";
+
   return (
-    <main className="min-h-screen bg-slate-950 px-5">
+    <main
+      className={`min-h-screen px-5 transition-all duration-700 ${backgroundClass}`}
+    >
       <Navbar />
 
       <div className="mx-auto mt-6 w-full max-w-2xl">
