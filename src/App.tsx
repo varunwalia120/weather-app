@@ -5,7 +5,7 @@ import SearchHistory from "./components/search/SearchHistory";
 import WeatherCard from "./components/weather/WeatherCard";
 
 import EmptyState from "./components/common/EmptyState";
-import Loading from "./components/common/Loading";
+import SkeletonCard from "./components/common/SkeletonCard";
 import ErrorMessage from "./components/common/ErrorMessage";
 
 import type { WeatherResponse } from "./types/weather";
@@ -110,14 +110,15 @@ function App() {
   };
 
   return (
-    <main className="min-h-screen bg-slate-950 px-6 pb-16">
-      <div className="mx-auto max-w-6xl">
+    <main className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-sky-950">
+      <div className="mx-auto flex min-h-screen max-w-[1600px] flex-col px-8 py-6">
         <Navbar />
 
-        <section className="mx-auto mt-8 w-full max-w-3xl">
+        {/* Search Section */}
+        <section className="mx-auto mt-6 w-full max-w-6xl">
           <SearchBar onSearch={handleSearch} />
 
-          <div className="mt-5 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <div className="mt-5 flex flex-wrap items-center justify-between gap-5">
             <LocationButton onLocationClick={handleCurrentLocation} />
 
             <UnitToggle unit={unit} onToggle={toggleUnit} />
@@ -126,9 +127,10 @@ function App() {
           <SearchHistory history={history} onSelect={handleSearch} />
         </section>
 
-        <section className="mt-10">
+        {/* Weather Dashboard */}
+        <section className="mt-8 flex-1">
           {loading ? (
-            <Loading />
+            <SkeletonCard />
           ) : error ? (
             <ErrorMessage message={error} />
           ) : weather ? (

@@ -5,36 +5,34 @@ import { motion } from "framer-motion";
 const Navbar = () => {
   return (
     <motion.header
-      initial={{ opacity: 0, y: -30 }}
+      initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{
-        duration: 0.8,
-        ease: "easeOut",
-      }}
-      className="mx-auto flex w-full max-w-6xl items-center justify-between py-6"
+      transition={{ duration: 0.6 }}
+      className="mx-auto flex w-full max-w-6xl items-center justify-between py-4"
     >
       <div className="flex items-center gap-4">
         <motion.div
           animate={{
-            rotate: [0, -8, 8, 0],
+            rotate: [0, 5, -5, 0],
+            scale: [1, 1.03, 1],
           }}
           transition={{
-            duration: 6,
+            duration: 8,
             repeat: Infinity,
             ease: "easeInOut",
           }}
-          className="flex h-14 w-14 items-center justify-center rounded-2xl bg-sky-500/15 backdrop-blur-xl"
+          className="flex h-12 w-12 items-center justify-center rounded-xl bg-sky-500/15 ring-1 ring-sky-500/20 backdrop-blur-lg"
         >
-          <FaCloudSun className="text-4xl text-sky-400" />
+          <FaCloudSun className="text-3xl text-sky-400" />
         </motion.div>
 
         <div>
-          <h1 className="text-4xl font-black tracking-tight text-white">
+          <h1 className="text-3xl font-extrabold tracking-tight text-white">
             Weatherly
           </h1>
 
-          <p className="mt-1 text-sm text-slate-400">
-            Beautiful weather forecasts, anywhere.
+          <p className="mt-0.5 text-sm text-slate-400">
+            Live weather forecasts around the world.
           </p>
         </div>
       </div>
@@ -43,18 +41,16 @@ const Navbar = () => {
         href="https://github.com/varunwalia120/weather-app"
         target="_blank"
         rel="noreferrer"
-        aria-label="View project on GitHub"
+        aria-label="GitHub Repository"
         whileHover={{
-          scale: 1.12,
-          rotate: 8,
+          scale: 1.08,
+          y: -2,
         }}
-        whileTap={{
-          scale: 0.95,
-        }}
-        className="rounded-2xl border border-white/10 bg-white/5 p-3 transition-colors duration-300 hover:bg-white/10"
+        whileTap={{ scale: 0.95 }}
+        className="rounded-xl border border-white/10 bg-white/5 p-3 backdrop-blur-lg transition-all duration-300 hover:border-sky-400/40 hover:bg-sky-500/10"
       >
         <FiGithub
-          size={24}
+          size={22}
           className="text-white"
         />
       </motion.a>

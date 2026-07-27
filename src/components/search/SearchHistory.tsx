@@ -16,23 +16,33 @@ const SearchHistory = ({
     <motion.section
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      className="mx-auto mt-6 w-full max-w-2xl"
+      transition={{ duration: 0.4 }}
+      className="mx-auto mt-4 w-full"
     >
-      <div className="mb-3 flex items-center gap-2">
-        <FiClock className="text-sky-400" />
-        <h3 className="text-sm font-medium text-slate-400">
+      <div className="mb-2 flex items-center gap-2">
+        <FiClock
+          size={16}
+          className="text-sky-400"
+        />
+
+        <h3 className="text-xs font-semibold uppercase tracking-wider text-slate-400">
           Recent Searches
         </h3>
       </div>
 
-      <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
+      <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
         {history.map((city) => (
           <motion.button
             key={city}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+            whileHover={{
+              scale: 1.05,
+              y: -2,
+            }}
+            whileTap={{
+              scale: 0.95,
+            }}
             onClick={() => onSelect(city)}
-            className="whitespace-nowrap rounded-full border border-white/10 bg-white/10 px-4 py-2 text-sm font-medium text-white transition-all duration-300 hover:border-sky-400 hover:bg-sky-500/20 hover:text-sky-300"
+            className="whitespace-nowrap rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-sm font-medium text-slate-200 transition-all duration-300 hover:border-sky-400/40 hover:bg-sky-500/15 hover:text-white"
           >
             {city}
           </motion.button>

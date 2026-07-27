@@ -4,22 +4,33 @@ import { FiSearch } from "react-icons/fi";
 const EmptyState = () => {
   return (
     <motion.section
-      initial={{ opacity: 0, scale: 0.95 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.5 }}
-      className="mx-auto mt-12 flex w-full max-w-3xl flex-col items-center justify-center rounded-3xl border border-white/10 bg-white/10 p-12 text-center shadow-2xl backdrop-blur-xl"
+      initial={{ opacity: 0, y: 15 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.4 }}
+      className="mx-auto mt-6 flex w-full max-w-4xl flex-col items-center justify-center rounded-2xl border border-white/10 bg-white/10 px-8 py-10 text-center shadow-xl backdrop-blur-xl"
     >
-      <div className="rounded-full bg-sky-500/10 p-6">
-        <FiSearch className="text-6xl text-sky-400" />
-      </div>
+      <motion.div
+        animate={{
+          scale: [1, 1.08, 1],
+        }}
+        transition={{
+          duration: 2.5,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+        className="flex h-20 w-20 items-center justify-center rounded-full bg-sky-500/10"
+      >
+        <FiSearch className="text-5xl text-sky-400" />
+      </motion.div>
 
-      <h2 className="mt-6 text-3xl font-bold text-white">
+      <h2 className="mt-5 text-2xl font-bold text-white">
         Search for a City
       </h2>
 
-      <p className="mt-3 max-w-md text-slate-400">
-        Enter the name of any city to view real-time weather information,
-        including temperature, humidity, wind speed and atmospheric pressure.
+      <p className="mt-3 max-w-lg text-sm leading-7 text-slate-400">
+        Enter any city name to instantly view its current temperature,
+        weather conditions, humidity, wind speed, visibility, pressure,
+        sunrise and sunset.
       </p>
     </motion.section>
   );

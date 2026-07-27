@@ -41,21 +41,18 @@ const SearchBar = ({ onSearch }: SearchBarProps) => {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 25 }}
+      initial={{ opacity: 0, y: 15 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{
-        delay: 0.2,
-        duration: 0.6,
-      }}
-      className="mx-auto mt-8 w-full max-w-3xl"
+      transition={{ duration: 0.5 }}
+      className="mx-auto mt-5 w-full"
     >
       <form
         onSubmit={handleSubmit}
-        className="flex flex-col gap-4 sm:flex-row"
+        className="flex flex-col gap-3 sm:flex-row"
       >
         <div className="relative flex-1">
           <FiSearch
-            size={22}
+            size={20}
             className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-400"
           />
 
@@ -67,7 +64,7 @@ const SearchBar = ({ onSearch }: SearchBarProps) => {
               if (error) setError("");
             }}
             placeholder="Search any city..."
-            className="h-16 w-full rounded-2xl border border-white/10 bg-white/10 pl-14 pr-14 text-lg text-white placeholder:text-slate-400 backdrop-blur-xl outline-none transition-all duration-300 focus:scale-[1.01] focus:border-sky-400 focus:ring-4 focus:ring-sky-500/20"
+            className="h-14 w-full rounded-xl border border-white/10 bg-white/10 pl-12 pr-12 text-base text-white placeholder:text-slate-500 backdrop-blur-xl outline-none transition-all duration-300 focus:border-sky-400 focus:ring-2 focus:ring-sky-400/30"
           />
 
           {city && (
@@ -75,22 +72,18 @@ const SearchBar = ({ onSearch }: SearchBarProps) => {
               type="button"
               onClick={clearInput}
               aria-label="Clear search"
-              className="absolute right-5 top-1/2 -translate-y-1/2 text-slate-400 transition-all duration-300 hover:scale-110 hover:text-white"
+              className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 transition hover:text-white"
             >
-              <FiX size={20} />
+              <FiX size={18} />
             </button>
           )}
         </div>
 
         <motion.button
-          whileHover={{
-            scale: 1.05,
-          }}
-          whileTap={{
-            scale: 0.95,
-          }}
+          whileHover={{ scale: 1.03 }}
+          whileTap={{ scale: 0.96 }}
           type="submit"
-          className="h-16 rounded-2xl bg-sky-500 px-8 text-lg font-semibold text-white shadow-lg shadow-sky-500/30 transition-all duration-300 hover:bg-sky-600"
+          className="h-14 min-w-[140px] rounded-xl bg-sky-500 px-8 font-semibold text-white shadow-lg shadow-sky-500/20 transition-all duration-300 hover:bg-sky-600"
         >
           Search
         </motion.button>
@@ -98,9 +91,9 @@ const SearchBar = ({ onSearch }: SearchBarProps) => {
 
       {error && (
         <motion.p
-          initial={{ opacity: 0, y: -5 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="mt-3 text-sm font-medium text-red-400"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="mt-2 text-sm text-red-400"
         >
           {error}
         </motion.p>
