@@ -10,7 +10,6 @@ import ErrorMessage from "./components/common/ErrorMessage";
 
 import type { WeatherResponse } from "./types/weather";
 import UnitToggle from "./components/common/UnitToggle";
-import { getBackground } from "./utils/background";
 
 import LocationButton from "./components/search/LocationButton";
 import {
@@ -37,7 +36,6 @@ function App() {
 
     // Prevent duplicate consecutive searches
     if (normalizedCity === lastSearchedCity) {
-      setError("You're already viewing this city's weather.");
       return;
     }
 
@@ -48,7 +46,7 @@ function App() {
       const data = await getWeatherByCity(city, unit);
 
       setWeather(data);
-      setCurrentCity(city);
+      
       setLastSearchedCity(normalizedCity);
 
       const updatedHistory = [
@@ -108,36 +106,12 @@ function App() {
     );
   };
 
-  const toggleUnit = async () => {
-    const newUnit = unit === "metric" ? "imperial" : "metric";
-
-    setUnit(newUnit);
-
-    if (!currentCity) return;
-
-    try {
-      setLoading(true);
-
-      const data = await getWeatherByCity(currentCity, newUnit);
-
-      setWeather(data);
-    } catch (err) {
-      if (err instanceof Error) {
-        setError(err.message);
-      }
-    } finally {
-      setLoading(false);
-    }
+  const toggleUnit = () => {
+    setUnit((prev) => (prev === "metric" ? "imperial" : "metric"));
   };
 
-  const backgroundClass = weather
-    ? getBackground(weather.weather[0].main)
-    : "bg-slate-950";
-
   return (
-    <main
-      className={`min-h-screen px-5 transition-all duration-700 ${backgroundClass}`}
-    >
+    <main className="min-h-screen bg-slate-950 px-5">
       <Navbar />
 
       <div className="mx-auto mt-6 w-full max-w-2xl">
