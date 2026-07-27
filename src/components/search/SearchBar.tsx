@@ -40,18 +40,23 @@ const SearchBar = ({ onSearch }: SearchBarProps) => {
   };
 
   return (
-    <div className="mx-auto mt-8 w-full max-w-2xl">
-      <motion.form
-        initial={{ opacity: 0, y: 25 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.15, duration: 0.5 }}
+    <motion.div
+      initial={{ opacity: 0, y: 25 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{
+        delay: 0.2,
+        duration: 0.6,
+      }}
+      className="mx-auto mt-8 w-full max-w-3xl"
+    >
+      <form
         onSubmit={handleSubmit}
-        className="flex items-center gap-3"
+        className="flex flex-col gap-4 sm:flex-row"
       >
         <div className="relative flex-1">
           <FiSearch
-            className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"
-            size={20}
+            size={22}
+            className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-400"
           />
 
           <input
@@ -61,42 +66,46 @@ const SearchBar = ({ onSearch }: SearchBarProps) => {
               setCity(e.target.value);
               if (error) setError("");
             }}
-            placeholder="Search for a city..."
-            className="w-full rounded-2xl border border-white/10 bg-white/10 py-4 pl-12 pr-12 text-white placeholder:text-slate-400 backdrop-blur-xl outline-none transition-all duration-300 focus:border-sky-400 focus:ring-2 focus:ring-sky-400/30"
+            placeholder="Search any city..."
+            className="h-16 w-full rounded-2xl border border-white/10 bg-white/10 pl-14 pr-14 text-lg text-white placeholder:text-slate-400 backdrop-blur-xl outline-none transition-all duration-300 focus:scale-[1.01] focus:border-sky-400 focus:ring-4 focus:ring-sky-500/20"
           />
 
           {city && (
             <button
               type="button"
               onClick={clearInput}
-              className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 transition hover:text-white"
               aria-label="Clear search"
+              className="absolute right-5 top-1/2 -translate-y-1/2 text-slate-400 transition-all duration-300 hover:scale-110 hover:text-white"
             >
-              <FiX size={18} />
+              <FiX size={20} />
             </button>
           )}
         </div>
 
         <motion.button
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
+          whileHover={{
+            scale: 1.05,
+          }}
+          whileTap={{
+            scale: 0.95,
+          }}
           type="submit"
-          className="rounded-2xl bg-sky-500 px-6 py-4 font-semibold text-white transition hover:bg-sky-600"
+          className="h-16 rounded-2xl bg-sky-500 px-8 text-lg font-semibold text-white shadow-lg shadow-sky-500/30 transition-all duration-300 hover:bg-sky-600"
         >
           Search
         </motion.button>
-      </motion.form>
+      </form>
 
       {error && (
         <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          className="mt-3 text-sm text-red-400"
+          initial={{ opacity: 0, y: -5 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="mt-3 text-sm font-medium text-red-400"
         >
           {error}
         </motion.p>
       )}
-    </div>
+    </motion.div>
   );
 };
 

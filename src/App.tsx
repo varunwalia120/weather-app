@@ -22,7 +22,6 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [unit, setUnit] = useState<"metric" | "imperial">("metric");
-  const [currentCity, setCurrentCity] = useState("");
 
   const [history, setHistory] = useState<string[]>(() => {
     const saved = localStorage.getItem("searchHistory");
@@ -115,29 +114,29 @@ function App() {
       <div className="mx-auto max-w-6xl">
         <Navbar />
 
-      <div className="mx-auto mt-6 w-full max-w-2xl">
-        <SearchBar onSearch={handleSearch} />
+        <section className="mx-auto mt-8 w-full max-w-3xl">
+          <SearchBar onSearch={handleSearch} />
 
-        <div className="mt-4 flex justify-center">
-          <LocationButton onLocationClick={handleCurrentLocation} />
-        </div>
+          <div className="mt-5 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <LocationButton onLocationClick={handleCurrentLocation} />
 
-        <div className="mt-4 flex justify-center">
-          <UnitToggle unit={unit} onToggle={toggleUnit} />
-        </div>
+            <UnitToggle unit={unit} onToggle={toggleUnit} />
+          </div>
 
-        <SearchHistory history={history} onSelect={handleSearch} />
-      </div>
+          <SearchHistory history={history} onSelect={handleSearch} />
+        </section>
 
-      {loading ? (
-        <Loading />
-      ) : error ? (
-        <ErrorMessage message={error} />
-      ) : weather ? (
-        <WeatherCard weather={weather} />
-      ) : (
-        <EmptyState />
-      )}
+        <section className="mt-10">
+          {loading ? (
+            <Loading />
+          ) : error ? (
+            <ErrorMessage message={error} />
+          ) : weather ? (
+            <WeatherCard weather={weather} />
+          ) : (
+            <EmptyState />
+          )}
+        </section>
       </div>
     </main>
   );
