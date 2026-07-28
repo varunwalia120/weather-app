@@ -4,51 +4,66 @@ import { FaCloudSun } from "react-icons/fa";
 const Loading = () => {
   return (
     <motion.section
-      initial={{ opacity: 0, y: 15 }}
-      animate={{ opacity: 1, y: 0 }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
       transition={{ duration: 0.4 }}
-      className="mx-auto mt-6 flex w-full max-w-4xl flex-col items-center justify-center rounded-2xl border border-white/10 bg-white/10 px-8 py-10 text-center shadow-xl backdrop-blur-xl"
+      className="mx-auto mt-8 flex w-full max-w-7xl flex-col items-center justify-center rounded-[32px] border border-white/10 bg-gradient-to-br from-white/10 to-white/5 px-10 py-16 shadow-2xl backdrop-blur-2xl"
     >
       <motion.div
         animate={{
-          rotate: [0, 12, -12, 0],
+          rotate: [0, 10, -10, 0],
           scale: [1, 1.08, 1],
+          y: [0, -8, 0],
         }}
         transition={{
-          duration: 2,
+          duration: 3,
           repeat: Infinity,
           ease: "easeInOut",
         }}
-        className="flex h-20 w-20 items-center justify-center rounded-full bg-sky-500/10"
+        className="flex h-28 w-28 items-center justify-center rounded-full bg-sky-500/10 shadow-lg shadow-sky-500/20"
       >
         <FaCloudSun
-          size={42}
+          size={60}
           className="text-sky-400"
         />
       </motion.div>
 
-      <h2 className="mt-5 text-2xl font-bold text-white">
-        Fetching Weather
-      </h2>
+      <h1 className="mt-8 text-4xl font-black text-white">
+        Fetching Weather Data
+      </h1>
 
-      <p className="mt-2 text-sm text-slate-400">
-        Please wait while we retrieve the latest weather data...
+      <p className="mt-3 max-w-xl text-center text-lg text-slate-300">
+        We're retrieving the latest weather conditions for your selected
+        location.
       </p>
 
-      <motion.div
-        className="mt-6 h-1.5 w-56 overflow-hidden rounded-full bg-white/10"
+      <div className="mt-10 w-full max-w-md">
+        <div className="h-2 overflow-hidden rounded-full bg-white/10">
+          <motion.div
+            className="h-full rounded-full bg-gradient-to-r from-sky-500 to-cyan-400"
+            initial={{ x: "-100%" }}
+            animate={{ x: "100%" }}
+            transition={{
+              duration: 1.5,
+              repeat: Infinity,
+              ease: "linear",
+            }}
+          />
+        </div>
+      </div>
+
+      <motion.p
+        animate={{
+          opacity: [0.5, 1, 0.5],
+        }}
+        transition={{
+          duration: 1.5,
+          repeat: Infinity,
+        }}
+        className="mt-6 text-sm tracking-wide text-slate-400"
       >
-        <motion.div
-          className="h-full rounded-full bg-sky-500"
-          initial={{ x: "-100%" }}
-          animate={{ x: "100%" }}
-          transition={{
-            duration: 1.2,
-            repeat: Infinity,
-            ease: "linear",
-          }}
-        />
-      </motion.div>
+        Please wait a moment...
+      </motion.p>
     </motion.section>
   );
 };

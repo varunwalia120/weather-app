@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { FiAlertTriangle } from "react-icons/fi";
+import { FiAlertTriangle, FiRefreshCw } from "react-icons/fi";
 
 type ErrorMessageProps = {
   message: string;
@@ -8,37 +8,56 @@ type ErrorMessageProps = {
 const ErrorMessage = ({ message }: ErrorMessageProps) => {
   return (
     <motion.section
-      initial={{ opacity: 0, y: 15 }}
+      initial={{ opacity: 0, y: 25 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4 }}
-      className="mx-auto mt-6 flex w-full max-w-4xl flex-col items-center rounded-2xl border border-red-500/20 bg-red-500/10 px-8 py-8 text-center shadow-xl backdrop-blur-xl"
+      transition={{ duration: 0.5 }}
+      className="mx-auto mt-8 w-full max-w-7xl rounded-[32px] border border-red-500/20 bg-gradient-to-br from-red-500/10 to-red-500/5 p-12 shadow-2xl backdrop-blur-2xl"
     >
-      <motion.div
-        animate={{
-          rotate: [0, -5, 5, -5, 0],
-        }}
-        transition={{
-          duration: 0.8,
-        }}
-        className="flex h-16 w-16 items-center justify-center rounded-full bg-red-500/15"
-      >
-        <FiAlertTriangle
-          size={34}
-          className="text-red-400"
-        />
-      </motion.div>
+      <div className="flex flex-col items-center text-center">
+        <motion.div
+          animate={{
+            rotate: [0, -8, 8, -8, 0],
+            scale: [1, 1.05, 1],
+          }}
+          transition={{
+            duration: 1.2,
+            repeat: Infinity,
+            repeatDelay: 2,
+          }}
+          className="flex h-24 w-24 items-center justify-center rounded-full bg-red-500/15 shadow-lg shadow-red-500/20"
+        >
+          <FiAlertTriangle
+            size={48}
+            className="text-red-400"
+          />
+        </motion.div>
 
-      <h2 className="mt-4 text-2xl font-bold text-white">
-        Something went wrong
-      </h2>
+        <h1 className="mt-8 text-4xl font-black text-white">
+          Unable to Fetch Weather
+        </h1>
 
-      <p className="mt-2 text-base font-medium text-red-300">
-        {message}
-      </p>
+        <p className="mt-4 max-w-2xl text-lg text-red-300">
+          {message}
+        </p>
 
-      <p className="mt-2 max-w-md text-sm leading-6 text-slate-400">
-        Check the spelling of the city name or try another location.
-      </p>
+        <p className="mt-3 max-w-xl text-slate-400">
+          Please check the spelling of the city name, verify your internet
+          connection, or try another location.
+        </p>
+
+        <motion.div
+          whileHover={{
+            scale: 1.05,
+          }}
+          className="mt-10 flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-6 py-4 backdrop-blur-xl"
+        >
+          <FiRefreshCw className="text-sky-400" />
+
+          <span className="text-sm font-medium text-slate-300">
+            Search again using the search bar above
+          </span>
+        </motion.div>
+      </div>
     </motion.section>
   );
 };

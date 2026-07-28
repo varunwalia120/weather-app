@@ -34,70 +34,72 @@ const WeatherDetails = ({
 
   const items = [
     {
-      icon: <FaTemperatureHigh className="text-4xl text-orange-400" />,
       title: "Feels Like",
       value: `${Math.round(feelsLike)}°C`,
+      icon: <FaTemperatureHigh className="text-orange-400 text-3xl" />,
     },
     {
-      icon: <FaTint className="text-4xl text-sky-400" />,
       title: "Humidity",
       value: `${humidity}%`,
+      icon: <FaTint className="text-sky-400 text-3xl" />,
     },
     {
-      icon: <FaWind className="text-4xl text-green-400" />,
-      title: "Wind",
+      title: "Wind Speed",
       value: `${wind} m/s`,
+      icon: <FaWind className="text-green-400 text-3xl" />,
     },
     {
-      icon: <WiBarometer className="text-6xl text-yellow-400" />,
       title: "Pressure",
       value: `${pressure} hPa`,
+      icon: <WiBarometer className="text-yellow-400 text-5xl" />,
     },
     {
-      icon: <FaEye className="text-4xl text-purple-400" />,
       title: "Visibility",
       value: `${visibility / 1000} km`,
+      icon: <FaEye className="text-purple-400 text-3xl" />,
     },
     {
-      icon: <WiSunrise className="text-6xl text-amber-400" />,
       title: "Sunrise",
       value: formatTime(sunrise),
+      icon: <WiSunrise className="text-amber-400 text-5xl" />,
     },
     {
-      icon: <WiSunset className="text-6xl text-orange-500" />,
       title: "Sunset",
       value: formatTime(sunset),
+      icon: <WiSunset className="text-orange-500 text-5xl" />,
     },
   ];
 
   return (
-    <div className="grid grid-cols-2 gap-5 xl:grid-cols-4">
+    <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
       {items.map((item, index) => (
         <motion.div
           key={item.title}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{
-            delay: index * 0.06,
+            delay: index * 0.05,
             duration: 0.4,
           }}
           whileHover={{
-            y: -8,
-            scale: 1.04,
+            y: -6,
+            scale: 1.03,
           }}
-          className="flex h-44 flex-col items-center justify-center rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl transition-all duration-300 hover:border-sky-400/30 hover:bg-white/10 hover:shadow-xl hover:shadow-sky-500/10"
+          className="group flex items-center gap-5 rounded-2xl border border-white/10 bg-gradient-to-br from-white/10 to-white/5 p-5 backdrop-blur-xl transition-all duration-300 hover:border-sky-400/30 hover:shadow-xl hover:shadow-sky-500/10"
         >
-          <div className="mb-4">
+          <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-slate-900/60 transition-all duration-300 group-hover:bg-sky-500/10">
             {item.icon}
           </div>
 
-          <h4 className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">
-            {item.title}
-          </h4>
+          <div className="flex flex-col">
+            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">
+              {item.title}
+            </span>
 
-          <p className="mt-3 text-3xl font-bold text-white">
-            {item.value}
-          </p>
+            <span className="mt-2 text-2xl font-bold text-white">
+              {item.value}
+            </span>
+          </div>
         </motion.div>
       ))}
     </div>

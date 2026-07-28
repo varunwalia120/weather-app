@@ -10,8 +10,8 @@ import ErrorMessage from "./components/common/ErrorMessage";
 
 import type { WeatherResponse } from "./types/weather";
 import UnitToggle from "./components/common/UnitToggle";
-
 import LocationButton from "./components/search/LocationButton";
+
 import {
   getWeatherByCity,
   getWeatherByCoordinates,
@@ -33,10 +33,7 @@ function App() {
   const handleSearch = async (city: string) => {
     const normalizedCity = city.trim().toLowerCase();
 
-    // Prevent duplicate consecutive searches
-    if (normalizedCity === lastSearchedCity) {
-      return;
-    }
+    if (normalizedCity === lastSearchedCity) return;
 
     try {
       setLoading(true);
@@ -45,17 +42,21 @@ function App() {
       const data = await getWeatherByCity(city, unit);
 
       setWeather(data);
-
       setLastSearchedCity(normalizedCity);
 
       const updatedHistory = [
         city,
-        ...history.filter((item) => item.toLowerCase() !== normalizedCity),
+        ...history.filter(
+          (item) => item.toLowerCase() !== normalizedCity
+        ),
       ].slice(0, 5);
 
       setHistory(updatedHistory);
 
-      localStorage.setItem("searchHistory", JSON.stringify(updatedHistory));
+      localStorage.setItem(
+        "searchHistory",
+        JSON.stringify(updatedHistory)
+      );
     } catch (err) {
       if (err instanceof Error) {
         setError(err.message);
@@ -71,7 +72,7 @@ function App() {
 
   const handleCurrentLocation = () => {
     if (!navigator.geolocation) {
-      setError("Geolocation is not supported by your browser.");
+      setError("Geolocation is not supported.");
       return;
     }
 
@@ -84,7 +85,7 @@ function App() {
           const data = await getWeatherByCoordinates(
             position.coords.latitude,
             position.coords.longitude,
-            unit,
+            unit
           );
 
           setWeather(data);
@@ -101,44 +102,68 @@ function App() {
       () => {
         setLoading(false);
         setError("Location permission denied.");
-      },
+      }
     );
   };
 
   const toggleUnit = () => {
-    setUnit((prev) => (prev === "metric" ? "imperial" : "metric"));
+    setUnit((prev) =>
+      prev === "metric" ? "imperial" : "metric"
+    );
   };
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-sky-950">
-      <div className="mx-auto flex min-h-screen max-w-[1600px] flex-col px-8 py-6">
+      <div className="w-full px-10 xl:px-16 2xl:px-24 py-4">
+
         <Navbar />
 
-        {/* Search Section */}
-        <section className="mx-auto mt-6 w-full max-w-6xl">
+        {/* Search Dashboard */}
+
+        <section className="mt-5 rounded-[32px] border border-white/10 bg-white/5 p-8 shadow-xl backdrop-blur-2xl">
+
           <SearchBar onSearch={handleSearch} />
 
-          <div className="mt-5 flex flex-wrap items-center justify-between gap-5">
-            <LocationButton onLocationClick={handleCurrentLocation} />
+          <div className="mt-6 flex flex-wrap items-center justify-between gap-5">
 
-            <UnitToggle unit={unit} onToggle={toggleUnit} />
+            <LocationButton
+              onLocationClick={handleCurrentLocation}
+            />
+
+            <UnitToggle
+              unit={unit}
+              onToggle={toggleUnit}
+            />
+
           </div>
 
-          <SearchHistory history={history} onSelect={handleSearch} />
+          <SearchHistory
+            history={history}
+            onSelect={handleSearch}
+          />
+
         </section>
 
         {/* Weather Dashboard */}
-        <section className="mt-8 flex-1">
+
+        <section className="mt-5">
+
           {loading ? (
             <SkeletonCard />
           ) : error ? (
-            <ErrorMessage message={error} />
+            <ErrorMessage
+              message={error}
+            />
           ) : weather ? (
-            <WeatherCard weather={weather} />
+            <WeatherCard
+              weather={weather}
+            />
           ) : (
             <EmptyState />
           )}
+
         </section>
+
       </div>
     </main>
   );

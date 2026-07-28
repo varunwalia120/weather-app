@@ -11,13 +11,25 @@ const UnitToggle = ({ unit, onToggle }: UnitToggleProps) => {
       whileHover={{ scale: 1.03 }}
       whileTap={{ scale: 0.97 }}
       onClick={onToggle}
-      className="flex h-14 items-center overflow-hidden rounded-xl border border-white/10 bg-white/10 backdrop-blur-xl"
       aria-label="Toggle temperature unit"
+      className="group relative flex h-14 w-36 items-center rounded-2xl border border-white/10 bg-slate-900/70 p-1 shadow-lg backdrop-blur-xl"
     >
+      <motion.div
+        layout
+        transition={{
+          type: "spring",
+          stiffness: 350,
+          damping: 30,
+        }}
+        className={`absolute top-1 h-12 w-[calc(50%-4px)] rounded-xl bg-gradient-to-r from-sky-500 to-cyan-500 ${
+          unit === "metric" ? "left-1" : "left-[calc(50%+2px)]"
+        }`}
+      />
+
       <span
-        className={`flex h-full w-14 items-center justify-center text-sm font-semibold transition-all duration-300 ${
+        className={`relative z-10 flex w-1/2 items-center justify-center text-sm font-semibold transition-colors duration-300 ${
           unit === "metric"
-            ? "bg-sky-500 text-white"
+            ? "text-white"
             : "text-slate-400"
         }`}
       >
@@ -25,9 +37,9 @@ const UnitToggle = ({ unit, onToggle }: UnitToggleProps) => {
       </span>
 
       <span
-        className={`flex h-full w-14 items-center justify-center text-sm font-semibold transition-all duration-300 ${
+        className={`relative z-10 flex w-1/2 items-center justify-center text-sm font-semibold transition-colors duration-300 ${
           unit === "imperial"
-            ? "bg-sky-500 text-white"
+            ? "text-white"
             : "text-slate-400"
         }`}
       >

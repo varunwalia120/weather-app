@@ -16,24 +16,35 @@ const LocationButton = ({ onLocationClick }: LocationButtonProps) => {
       whileTap={{
         scale: 0.97,
       }}
-      className="flex h-14 items-center justify-center gap-2 rounded-xl border border-sky-400/20 bg-sky-500 px-6 font-semibold text-white shadow-lg shadow-sky-500/20 transition-all duration-300 hover:border-sky-300 hover:bg-sky-600"
+      className="group flex h-14 items-center justify-center gap-3 rounded-2xl border border-sky-400/20 bg-gradient-to-r from-slate-900/80 to-slate-800/80 px-6 text-white shadow-lg backdrop-blur-xl transition-all duration-300 hover:border-sky-400/40 hover:shadow-sky-500/20"
     >
       <motion.div
         animate={{
-          y: [0, -2, 0],
+          y: [0, -3, 0],
+          scale: [1, 1.08, 1],
         }}
         transition={{
           duration: 2,
           repeat: Infinity,
           ease: "easeInOut",
         }}
+        className="flex h-9 w-9 items-center justify-center rounded-full bg-sky-500/15"
       >
-        <FiMapPin size={18} />
+        <FiMapPin
+          size={18}
+          className="text-sky-400"
+        />
       </motion.div>
 
-      <span className="text-sm sm:text-base">
-        Current Location
-      </span>
+      <div className="flex flex-col items-start leading-none">
+        <span className="text-xs uppercase tracking-widest text-slate-400">
+          Detect
+        </span>
+
+        <span className="text-sm font-semibold text-white">
+          Current Location
+        </span>
+      </div>
     </motion.button>
   );
 };
