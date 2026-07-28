@@ -46,12 +46,17 @@ function App() {
 
       const updatedHistory = [
         city,
-        ...history.filter((item) => item.toLowerCase() !== normalizedCity),
+        ...history.filter(
+          (item) => item.toLowerCase() !== normalizedCity,
+        ),
       ].slice(0, 5);
 
       setHistory(updatedHistory);
 
-      localStorage.setItem("searchHistory", JSON.stringify(updatedHistory));
+      localStorage.setItem(
+        "searchHistory",
+        JSON.stringify(updatedHistory),
+      );
     } catch (err) {
       if (err instanceof Error) {
         setError(err.message);
@@ -102,13 +107,19 @@ function App() {
   };
 
   const toggleUnit = () => {
-    setUnit((prev) => (prev === "metric" ? "imperial" : "metric"));
+    setUnit((prev) =>
+      prev === "metric" ? "imperial" : "metric",
+    );
   };
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-sky-950">
-      <div className="w-full px-10 xl:px-16 2xl:px-24 py-4">
-        <Navbar sunrise={weather?.sys.sunrise} sunset={weather?.sys.sunset}/>
+      <div className="w-full px-10 py-4 xl:px-16 2xl:px-24">
+        <Navbar
+          sunrise={weather?.sys.sunrise}
+          sunset={weather?.sys.sunset}
+          weatherType={weather?.weather[0].main}
+        />
 
         {/* Search Dashboard */}
 
@@ -116,12 +127,20 @@ function App() {
           <SearchBar onSearch={handleSearch} />
 
           <div className="mt-6 flex flex-wrap items-center justify-between gap-5">
-            <LocationButton onLocationClick={handleCurrentLocation} />
+            <LocationButton
+              onLocationClick={handleCurrentLocation}
+            />
 
-            <UnitToggle unit={unit} onToggle={toggleUnit} />
+            <UnitToggle
+              unit={unit}
+              onToggle={toggleUnit}
+            />
           </div>
 
-          <SearchHistory history={history} onSelect={handleSearch} />
+          <SearchHistory
+            history={history}
+            onSelect={handleSearch}
+          />
         </section>
 
         {/* Weather Dashboard */}
@@ -130,9 +149,13 @@ function App() {
           {loading ? (
             <SkeletonCard />
           ) : error ? (
-            <ErrorMessage message={error} />
+            <ErrorMessage
+              message={error}
+            />
           ) : weather ? (
-            <WeatherCard weather={weather} />
+            <WeatherCard
+              weather={weather}
+            />
           ) : (
             <EmptyState />
           )}
