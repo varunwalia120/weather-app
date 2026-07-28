@@ -16,11 +16,7 @@ type NavbarProps = {
   weatherType?: string;
 };
 
-const Navbar = ({
-  sunrise,
-  sunset,
-  weatherType,
-}: NavbarProps) => {
+const Navbar = ({ sunrise, sunset, weatherType }: NavbarProps) => {
   const now = Math.floor(Date.now() / 1000);
 
   const isDay =
@@ -37,32 +33,34 @@ const Navbar = ({
     });
   };
 
+  const weather = weatherType?.toLowerCase();
+
   const getWeatherIcon = () => {
-    switch (weatherType?.toLowerCase()) {
+    switch (weather) {
       case "clear":
         return (
-          <FaSun className="text-[34px] text-yellow-400 drop-shadow-lg" />
+          <FaSun className="text-[36px] text-yellow-400" />
         );
 
       case "clouds":
         return (
-          <FaCloud className="text-[34px] text-slate-200" />
+          <FaCloud className="text-[36px] text-slate-200" />
         );
 
       case "rain":
       case "drizzle":
         return (
-          <FaCloudRain className="text-[34px] text-sky-400" />
+          <FaCloudRain className="text-[36px] text-sky-400" />
         );
 
       case "thunderstorm":
         return (
-          <FaBolt className="text-[34px] text-yellow-300" />
+          <FaBolt className="text-[36px] text-yellow-300" />
         );
 
       case "snow":
         return (
-          <FaSnowflake className="text-[34px] text-cyan-200" />
+          <FaSnowflake className="text-[36px] text-cyan-200" />
         );
 
       case "mist":
@@ -70,23 +68,38 @@ const Navbar = ({
       case "haze":
       case "smoke":
         return (
-          <FaSmog className="text-[34px] text-slate-300" />
+          <FaSmog className="text-[36px] text-slate-300" />
         );
 
       default:
         return (
-          <FaCloudSun className="text-[34px] text-sky-400" />
+          <FaCloudSun className="text-[36px] text-sky-400" />
         );
     }
   };
+
+  const cardStyle =
+    weather === "clear"
+      ? "border-yellow-400/30 bg-yellow-500/10 shadow-yellow-500/30"
+      : weather === "clouds"
+      ? "border-slate-300/20 bg-slate-500/10 shadow-slate-500/20"
+      : weather === "rain" || weather === "drizzle"
+      ? "border-sky-400/20 bg-sky-500/10 shadow-sky-500/20"
+      : weather === "snow"
+      ? "border-cyan-300/20 bg-cyan-500/10 shadow-cyan-400/20"
+      : weather === "thunderstorm"
+      ? "border-yellow-300/30 bg-yellow-500/10 shadow-yellow-400/20"
+      : weather === "mist" ||
+        weather === "fog" ||
+        weather === "haze"
+      ? "border-slate-300/20 bg-slate-500/10 shadow-slate-400/20"
+      : "border-sky-400/20 bg-gradient-to-br from-sky-500/20 to-cyan-500/10 shadow-sky-500/20";
 
   return (
     <motion.header
       initial={{ opacity: 0, y: -25 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{
-        duration: 0.6,
-      }}
+      transition={{ duration: 0.6 }}
       className="flex items-center justify-between pb-2"
     >
       {/* Logo */}
@@ -95,29 +108,46 @@ const Navbar = ({
         <motion.div
           animate={{
             rotate:
-              weatherType?.toLowerCase() === "clear"
-                ? [0, 10, -10, 0]
-                : weatherType?.toLowerCase() === "snow"
+              weather === "clear"
+                ? 360
+                : weather === "snow"
                 ? 360
                 : 0,
 
-            y:
-              weatherType?.toLowerCase() === "clouds"
-                ? [0, -6, 0]
-                : weatherType?.toLowerCase() === "rain"
-                ? [0, 5, 0]
-                : weatherType?.toLowerCase() === "drizzle"
-                ? [0, 5, 0]
+            x:
+              weather === "clouds"
+                ? [-6, 6, -6]
                 : 0,
 
-            scale: [1, 1.05, 1],
+            y:
+              weather === "rain" ||
+              weather === "drizzle"
+                ? [0, 6, 0]
+                : weather === "mist"
+                ? [-2, 2, -2]
+                : 0,
+
+            scale:
+              weather === "thunderstorm"
+                ? [1, 1.12, 0.94, 1]
+                : [1, 1.05, 1],
           }}
           transition={{
-            duration: 5,
+            duration:
+              weather === "clear"
+                ? 18
+                : weather === "snow"
+                ? 10
+                : 3,
+
             repeat: Infinity,
-            ease: "easeInOut",
+
+            ease:
+              weather === "clear"
+                ? "linear"
+                : "easeInOut",
           }}
-          className="flex h-16 w-16 items-center justify-center rounded-2xl border border-sky-400/20 bg-gradient-to-br from-sky-500/20 to-cyan-500/10 shadow-lg shadow-sky-500/20 backdrop-blur-xl"
+          className={`flex h-16 w-16 items-center justify-center rounded-2xl border shadow-lg backdrop-blur-xl ${cardStyle}`}
         >
           {getWeatherIcon()}
         </motion.div>
@@ -166,7 +196,7 @@ const Navbar = ({
           }
         >
           {isDay ? (
-            <FaSun className="text-4xl text-yellow-400 drop-shadow-lg" />
+            <FaSun className="text-4xl text-yellow-400" />
           ) : (
             <FaMoon className="text-4xl text-slate-200" />
           )}
