@@ -1,6 +1,8 @@
 export interface WeatherResponse {
   name: string;
 
+  timezone: number; 
+
   main: {
     temp: number;
     feels_like: number;

@@ -46,17 +46,12 @@ function App() {
 
       const updatedHistory = [
         city,
-        ...history.filter(
-          (item) => item.toLowerCase() !== normalizedCity
-        ),
+        ...history.filter((item) => item.toLowerCase() !== normalizedCity),
       ].slice(0, 5);
 
       setHistory(updatedHistory);
 
-      localStorage.setItem(
-        "searchHistory",
-        JSON.stringify(updatedHistory)
-      );
+      localStorage.setItem("searchHistory", JSON.stringify(updatedHistory));
     } catch (err) {
       if (err instanceof Error) {
         setError(err.message);
@@ -85,7 +80,7 @@ function App() {
           const data = await getWeatherByCoordinates(
             position.coords.latitude,
             position.coords.longitude,
-            unit
+            unit,
           );
 
           setWeather(data);
@@ -102,68 +97,46 @@ function App() {
       () => {
         setLoading(false);
         setError("Location permission denied.");
-      }
+      },
     );
   };
 
   const toggleUnit = () => {
-    setUnit((prev) =>
-      prev === "metric" ? "imperial" : "metric"
-    );
+    setUnit((prev) => (prev === "metric" ? "imperial" : "metric"));
   };
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-sky-950">
       <div className="w-full px-10 xl:px-16 2xl:px-24 py-4">
-
-        <Navbar />
+        <Navbar sunrise={weather?.sys.sunrise} sunset={weather?.sys.sunset}/>
 
         {/* Search Dashboard */}
 
-        <section className="mt-5 rounded-[32px] border border-white/10 bg-white/5 p-8 shadow-xl backdrop-blur-2xl">
-
+        <section className="mt-3 rounded-[32px] border border-white/10 bg-white/5 p-8 shadow-xl backdrop-blur-2xl">
           <SearchBar onSearch={handleSearch} />
 
           <div className="mt-6 flex flex-wrap items-center justify-between gap-5">
+            <LocationButton onLocationClick={handleCurrentLocation} />
 
-            <LocationButton
-              onLocationClick={handleCurrentLocation}
-            />
-
-            <UnitToggle
-              unit={unit}
-              onToggle={toggleUnit}
-            />
-
+            <UnitToggle unit={unit} onToggle={toggleUnit} />
           </div>
 
-          <SearchHistory
-            history={history}
-            onSelect={handleSearch}
-          />
-
+          <SearchHistory history={history} onSelect={handleSearch} />
         </section>
 
         {/* Weather Dashboard */}
 
         <section className="mt-5">
-
           {loading ? (
             <SkeletonCard />
           ) : error ? (
-            <ErrorMessage
-              message={error}
-            />
+            <ErrorMessage message={error} />
           ) : weather ? (
-            <WeatherCard
-              weather={weather}
-            />
+            <WeatherCard weather={weather} />
           ) : (
             <EmptyState />
           )}
-
         </section>
-
       </div>
     </main>
   );
