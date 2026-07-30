@@ -20,33 +20,96 @@ const getWeatherIcon = (weather: string) => {
   switch (weather.toLowerCase()) {
     case "clear":
       return (
-        <WiDaySunny className="text-6xl text-yellow-300 drop-shadow-lg" />
+        <motion.div
+          animate={{ rotate: 360 }}
+          transition={{
+            duration: 18,
+            repeat: Infinity,
+            ease: "linear",
+          }}
+        >
+          <WiDaySunny className="text-7xl text-yellow-300 drop-shadow-[0_0_20px_rgba(253,224,71,0.8)]" />
+        </motion.div>
       );
 
     case "clouds":
       return (
-        <WiCloud className="text-6xl text-gray-200" />
+        <motion.div
+          animate={{
+            x: [-6, 6, -6],
+          }}
+          transition={{
+            duration: 4,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        >
+          <WiCloud className="text-7xl text-slate-200" />
+        </motion.div>
       );
 
     case "rain":
     case "drizzle":
       return (
-        <WiRain className="text-6xl text-sky-300" />
+        <motion.div
+          animate={{
+            y: [0, 6, 0],
+          }}
+          transition={{
+            duration: 1.2,
+            repeat: Infinity,
+          }}
+        >
+          <WiRain className="text-7xl text-sky-300" />
+        </motion.div>
       );
 
     case "snow":
       return (
-        <WiSnow className="text-6xl text-white" />
+        <motion.div
+          animate={{
+            rotate: [0, 360],
+          }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: "linear",
+          }}
+        >
+          <WiSnow className="text-7xl text-white" />
+        </motion.div>
       );
 
     case "thunderstorm":
       return (
-        <WiThunderstorm className="text-6xl text-yellow-400" />
+        <motion.div
+          animate={{
+            scale: [1, 1.12, 1],
+            opacity: [1, 0.75, 1],
+          }}
+          transition={{
+            duration: 0.9,
+            repeat: Infinity,
+          }}
+        >
+          <WiThunderstorm className="text-7xl text-yellow-400" />
+        </motion.div>
       );
 
     default:
       return (
-        <WiFog className="text-6xl text-slate-300" />
+        <motion.div
+          animate={{
+            x: [-5, 5, -5],
+            opacity: [0.7, 1, 0.7],
+          }}
+          transition={{
+            duration: 5,
+            repeat: Infinity,
+          }}
+        >
+          <WiFog className="text-7xl text-slate-300" />
+        </motion.div>
       );
   }
 };
@@ -61,32 +124,32 @@ export default function ForecastCard({
   return (
     <motion.div
       whileHover={{
-        y: -8,
-        scale: 1.04,
+        y: -10,
+        scale: 1.05,
       }}
       transition={{
         duration: 0.25,
       }}
-      className="rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl shadow-xl"
+      className="rounded-3xl border border-white/10 bg-white/5 p-6 shadow-xl backdrop-blur-xl transition-all duration-300 hover:border-sky-400/40 hover:shadow-[0_0_30px_rgba(56,189,248,0.2)]"
     >
-      <h3 className="text-center text-lg font-semibold text-white">
+      <h3 className="text-center text-xl font-semibold text-white">
         {day}
       </h3>
 
-      <div className="my-4 flex justify-center">
+      <div className="my-6 flex justify-center">
         {getWeatherIcon(weather)}
       </div>
 
-      <p className="text-center text-sm capitalize text-slate-300">
+      <p className="text-center text-sm capitalize tracking-wide text-slate-300">
         {description}
       </p>
 
-      <div className="mt-5 flex justify-between text-white">
-        <span className="font-semibold">
+      <div className="mt-6 flex items-center justify-between">
+        <span className="text-2xl font-bold text-white">
           {Math.round(max)}°
         </span>
 
-        <span className="text-slate-400">
+        <span className="text-lg font-medium text-slate-400">
           {Math.round(min)}°
         </span>
       </div>
