@@ -8,6 +8,7 @@ const FORECAST_URL =
   "https://api.openweathermap.org/data/2.5/forecast";
 
 const API_KEY = import.meta.env.VITE_WEATHER_API_KEY;
+console.log("API KEY:", API_KEY);
 
 /* ===========================
    CURRENT WEATHER BY CITY
