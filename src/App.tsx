@@ -10,6 +10,7 @@ import ErrorMessage from "./components/common/ErrorMessage";
 
 import type { WeatherResponse } from "./types/weather";
 import type { ForecastResponse } from "./types/forecast";
+import AnimatedBackground from "./components/background/AnimatedBackground";
 
 import UnitToggle from "./components/common/UnitToggle";
 import ForecastList from "./components/forecast/ForecastList";
@@ -24,8 +25,7 @@ import {
 
 function App() {
   const [weather, setWeather] = useState<WeatherResponse | null>(null);
-  const [forecast, setForecast] =
-    useState<ForecastResponse | null>(null);
+  const [forecast, setForecast] = useState<ForecastResponse | null>(null);
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -59,17 +59,12 @@ function App() {
 
       const updatedHistory = [
         city,
-        ...history.filter(
-          (item) => item.toLowerCase() !== normalizedCity,
-        ),
+        ...history.filter((item) => item.toLowerCase() !== normalizedCity),
       ].slice(0, 5);
 
       setHistory(updatedHistory);
 
-      localStorage.setItem(
-        "searchHistory",
-        JSON.stringify(updatedHistory),
-      );
+      localStorage.setItem("searchHistory", JSON.stringify(updatedHistory));
     } catch (err) {
       if (err instanceof Error) {
         setError(err.message);
@@ -132,63 +127,57 @@ function App() {
   };
 
   const toggleUnit = () => {
-    setUnit((prev) =>
-      prev === "metric" ? "imperial" : "metric",
-    );
+    setUnit((prev) => (prev === "metric" ? "imperial" : "metric"));
   };
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-sky-950">
-      <div className="w-full px-10 py-4 xl:px-16 2xl:px-24">
-        <Navbar
-          sunrise={weather?.sys.sunrise}
-          sunset={weather?.sys.sunset}
-          weatherType={weather?.weather[0].main}
-        />
+    <>
+      <AnimatedBackground weather={weather?.weather[0].main} />
 
-        {/* Search Dashboard */}
-
-        <section className="mt-3 rounded-[32px] border border-white/10 bg-white/5 p-8 shadow-xl backdrop-blur-2xl">
-          <SearchBar onSearch={handleSearch} />
-
-          <div className="mt-6 flex flex-wrap items-center justify-between gap-5">
-            <LocationButton
-              onLocationClick={handleCurrentLocation}
-            />
-
-            <UnitToggle
-              unit={unit}
-              onToggle={toggleUnit}
-            />
-          </div>
-
-          <SearchHistory
-            history={history}
-            onSelect={handleSearch}
+      <main className="min-h-screen">
+        <div className="w-full px-10 py-4 xl:px-16 2xl:px-24">
+          <Navbar
+            sunrise={weather?.sys.sunrise}
+            sunset={weather?.sys.sunset}
+            weatherType={weather?.weather[0].main}
           />
-        </section>
 
-        {/* Weather Dashboard */}
+          {/* Search Dashboard */}
 
-        <section className="mt-5">
-          {loading ? (
-            <SkeletonCard />
-          ) : error ? (
-            <ErrorMessage message={error} />
-          ) : weather ? (
-            <>
-              <WeatherCard weather={weather} />
-              <ForecastList forecast={forecast} />
+          <section className="mt-3 rounded-[32px] border border-white/10 bg-white/5 p-8 shadow-xl backdrop-blur-2xl">
+            <SearchBar onSearch={handleSearch} />
 
-              {/* Forecast component will be added here */}
-              {/* <ForecastList forecast={forecast} unit={unit} /> */}
-            </>
-          ) : (
-            <EmptyState />
-          )}
-        </section>
-      </div>
-    </main>
+            <div className="mt-6 flex flex-wrap items-center justify-between gap-5">
+              <LocationButton onLocationClick={handleCurrentLocation} />
+
+              <UnitToggle unit={unit} onToggle={toggleUnit} />
+            </div>
+
+            <SearchHistory history={history} onSelect={handleSearch} />
+          </section>
+
+          {/* Weather Dashboard */}
+
+          <section className="mt-5">
+            {loading ? (
+              <SkeletonCard />
+            ) : error ? (
+              <ErrorMessage message={error} />
+            ) : weather ? (
+              <>
+                <WeatherCard weather={weather} />
+                <ForecastList forecast={forecast} />
+
+                {/* Forecast component will be added here */}
+                {/* <ForecastList forecast={forecast} unit={unit} /> */}
+              </>
+            ) : (
+              <EmptyState />
+            )}
+          </section>
+        </div>
+      </main>
+    </>
   );
 }
 
