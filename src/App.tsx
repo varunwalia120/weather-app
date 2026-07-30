@@ -9,16 +9,24 @@ import SkeletonCard from "./components/common/SkeletonCard";
 import ErrorMessage from "./components/common/ErrorMessage";
 
 import type { WeatherResponse } from "./types/weather";
+import type { ForecastResponse } from "./types/forecast";
+
 import UnitToggle from "./components/common/UnitToggle";
+import ForecastList from "./components/forecast/ForecastList";
 import LocationButton from "./components/search/LocationButton";
 
 import {
   getWeatherByCity,
   getWeatherByCoordinates,
+  getForecastByCity,
+  getForecastByCoordinates,
 } from "./services/weatherApi";
 
 function App() {
   const [weather, setWeather] = useState<WeatherResponse | null>(null);
+  const [forecast, setForecast] =
+    useState<ForecastResponse | null>(null);
+
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [unit, setUnit] = useState<"metric" | "imperial">("metric");
@@ -39,9 +47,14 @@ function App() {
       setLoading(true);
       setError("");
 
-      const data = await getWeatherByCity(city, unit);
+      const [weatherData, forecastData] = await Promise.all([
+        getWeatherByCity(city, unit),
+        getForecastByCity(city, unit),
+      ]);
 
-      setWeather(data);
+      setWeather(weatherData);
+      setForecast(forecastData);
+
       setLastSearchedCity(normalizedCity);
 
       const updatedHistory = [
@@ -65,6 +78,7 @@ function App() {
       }
 
       setWeather(null);
+      setForecast(null);
     } finally {
       setLoading(false);
     }
@@ -82,19 +96,30 @@ function App() {
     navigator.geolocation.getCurrentPosition(
       async (position) => {
         try {
-          const data = await getWeatherByCoordinates(
-            position.coords.latitude,
-            position.coords.longitude,
-            unit,
-          );
+          const [weatherData, forecastData] = await Promise.all([
+            getWeatherByCoordinates(
+              position.coords.latitude,
+              position.coords.longitude,
+              unit,
+            ),
+            getForecastByCoordinates(
+              position.coords.latitude,
+              position.coords.longitude,
+              unit,
+            ),
+          ]);
 
-          setWeather(data);
+          setWeather(weatherData);
+          setForecast(forecastData);
         } catch (err) {
           if (err instanceof Error) {
             setError(err.message);
           } else {
             setError("Unable to fetch weather.");
           }
+
+          setWeather(null);
+          setForecast(null);
         } finally {
           setLoading(false);
         }
@@ -149,13 +174,15 @@ function App() {
           {loading ? (
             <SkeletonCard />
           ) : error ? (
-            <ErrorMessage
-              message={error}
-            />
+            <ErrorMessage message={error} />
           ) : weather ? (
-            <WeatherCard
-              weather={weather}
-            />
+            <>
+              <WeatherCard weather={weather} />
+              <ForecastList forecast={forecast} />
+
+              {/* Forecast component will be added here */}
+              {/* <ForecastList forecast={forecast} unit={unit} /> */}
+            </>
           ) : (
             <EmptyState />
           )}
