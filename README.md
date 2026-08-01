@@ -803,3 +803,94 @@ This project helped strengthen my understanding of:
 - Error Handling
 - Type Safety
 - Local Storage
+
+# 🚀 Future Improvements
+
+The following features are planned for future releases:
+
+- 🌍 Auto-detect user location on first visit
+- 📈 Weather charts using Chart.js
+- 🗺️ Interactive weather maps
+- 🌅 Hourly weather forecast
+- 🔔 Weather alerts and notifications
+- ⭐ Favorite cities
+- 🌙 Automatic Dark/Light mode
+- 🌎 Multi-language support
+- 📱 Progressive Web App (PWA)
+- 🧪 Unit testing with Vitest
+- ⚡ Performance optimizations
+- 🤖 AI-powered weather insights
+
+# 🤝 Contributing
+
+Contributions are welcome!
+
+If you'd like to improve Weatherly:
+
+1. Fork the repository
+2. Create a new feature branch
+
+```bash
+git checkout -b feature/new-feature
+```
+
+3. Commit your changes
+
+```bash
+git commit -m "feat: add new feature"
+```
+
+4. Push the branch
+
+```bash
+git push origin feature/new-feature
+```
+
+5. Open a Pull Request
+
+# 👨‍💻 Author
+
+**Varun Walia**
+
+- GitHub: https://github.com/varunwalia120
+- LinkedIn: https://linkedin.com/in/YOUR-LINKEDIN
+- Portfolio: https://YOUR-PORTFOLIO
+
+# 📄 License
+
+This project is licensed under the MIT License.
+
+Feel free to use, modify, and distribute this project for educational purposes.
+
+# 🙏 Acknowledgements
+
+Special thanks to:
+
+- OpenWeather API
+- React
+- Vite
+- Tailwind CSS
+- TypeScript
+- Axios
+- Framer Motion
+- React Icons
+- Vercel
+
+# 📊 Project Statistics
+
+| Category | Count |
+|----------|------:|
+| Components | 15+ |
+| API Endpoints | 3 |
+| React Hooks | 8+ |
+| TypeScript Interfaces | 10+ |
+| Weather Conditions Supported | 8+ |
+| Pages | 1 |
+| Responsive Breakpoints | 4 |
+| Technologies Used | 9 |
+
+# ⭐ Support
+
+If you found this project helpful, please consider giving it a ⭐ on GitHub.
+
+It helps others discover the project and motivates further development.
