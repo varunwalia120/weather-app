@@ -257,3 +257,53 @@ VITE_WEATHER_API_KEY=YOUR_OPENWEATHER_API_KEY
 | `VITE_WEATHER_API_KEY` | OpenWeather API Key |
 
 > ⚠️ Never commit your `.env` file to GitHub.
+
+# 📸 Application Preview
+
+## 🏠 Landing Page
+
+![Home](screenshots/home.png)
+
+---
+
+## 🌦 Weather Dashboard
+
+![Dashboard](screenshots/weather-dashboard.png)
+
+---
+
+## 📅 Five Day Forecast
+
+![Forecast](screenshots/forecast.png)
+
+---
+
+## 📍 Current Location
+
+![Location](screenshots/location.png)
+
+---
+
+## 🔎 Search History
+
+![Search History](screenshots/search-history.png)
+
+---
+
+## ⌛ Loading State
+
+![Loading](screenshots/loading.png)
+
+---
+
+## ❌ Error Handling
+
+![Error](screenshots/error.png)
+
+---
+
+## 📱 Responsive Design
+
+![Mobile](screenshots/mobile.png)
+
+---
