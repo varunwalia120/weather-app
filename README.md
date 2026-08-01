@@ -460,58 +460,41 @@ I --> J[Render Dashboard]
 ```mermaid
 flowchart LR
 
-Weather API
+A[Weather API]
+B[Weather Service]
+C[React State]
+D[Navbar]
+E[Weather Card]
+F[Forecast]
+G[Animated Background]
+H[Search History]
 
--->
-
-Weather Service
-
--->
-
-React State
-
--->
-
-Navbar
-
-React State --> Weather Card
-
-React State --> Forecast
-
-React State --> Animated Background
-
-React State --> Search History
+A --> B
+B --> C
+C --> D
+C --> E
+C --> F
+C --> G
+C --> H
 ```
+
 ## 🚀 Deployment Pipeline
 
 ```mermaid
 flowchart LR
 
-Developer
+A[Developer]
+B[Git Commit]
+C[GitHub]
+D[Vercel]
+E[Production Build]
+F[Weatherly]
+G[OpenWeather API]
 
--->
-
-Git Commit
-
--->
-
-GitHub
-
--->
-
-Vercel
-
--->
-
-Production Build
-
--->
-
-Weatherly
-
-Weatherly
-
--->
-
-OpenWeather API
+A --> B
+B --> C
+C --> D
+D --> E
+E --> F
+F --> G
 ```
