@@ -307,3 +307,15 @@ VITE_WEATHER_API_KEY=YOUR_OPENWEATHER_API_KEY
 ![Mobile](screenshots/mobile.png)
 
 ---
+
+# 🎨 UI Highlights
+
+- 🌈 Dynamic Animated Background
+- 🎭 Smooth Framer Motion Animations
+- 🌙 Modern Dark Theme
+- 📱 Fully Responsive Layout
+- 🎯 Interactive Hover Effects
+- ⚡ Fast Page Rendering
+- 🎨 Glassmorphism Cards
+- 🔄 Animated Weather Icons
+- 💡 Clean Minimal Design
