@@ -319,3 +319,199 @@ VITE_WEATHER_API_KEY=YOUR_OPENWEATHER_API_KEY
 - 🎨 Glassmorphism Cards
 - 🔄 Animated Weather Icons
 - 💡 Clean Minimal Design
+
+# 🏗️ System Architecture
+
+## 🌐 High-Level Architecture
+
+```mermaid
+flowchart LR
+
+subgraph Client
+A[👤 User]
+B[🌐 Browser]
+C[⚛️ React App]
+end
+
+subgraph Frontend
+D[🔍 Search Module]
+E[📍 Location Module]
+F[📊 Weather Dashboard]
+G[📅 Forecast Module]
+H[🎨 Animated Background]
+end
+
+subgraph Services
+I[Axios Service]
+end
+
+subgraph Backend
+J[(OpenWeather API)]
+end
+
+A --> B
+B --> C
+
+C --> D
+C --> E
+C --> F
+C --> G
+C --> H
+
+D --> I
+E --> I
+
+I --> J
+
+J --> I
+
+I --> C
+```
+## ⚛️ React Component Architecture
+
+```mermaid
+graph TD
+
+App
+
+--> AnimatedBackground
+
+App --> Navbar
+
+App --> SearchBar
+
+App --> LocationButton
+
+App --> UnitToggle
+
+App --> SearchHistory
+
+App --> WeatherCard
+
+App --> ForecastList
+
+WeatherCard --> WeatherDetails
+
+ForecastList --> ForecastCard
+```
+## 🔍 Search Workflow
+
+```mermaid
+flowchart TD
+
+A([User])
+
+-->
+
+B[Search City]
+
+-->
+
+C{Input Valid?}
+
+C -->|No| D[Show Error]
+
+C -->|Yes| E[Weather Service]
+
+E --> F[Axios]
+
+F --> G[OpenWeather API]
+
+G --> H[Weather Response]
+
+H --> I[React State]
+
+I --> J[Dashboard]
+```
+## 📍 Current Location
+
+```mermaid
+flowchart TD
+
+A([User])
+
+-->
+
+B[Detect Location]
+
+-->
+
+C[Browser Geolocation API]
+
+-->
+
+D{Permission Granted?}
+
+D -->|No| E[Permission Error]
+
+D -->|Yes| F[Latitude & Longitude]
+
+F --> G[Axios]
+
+G --> H[OpenWeather API]
+
+H --> I[Weather Response]
+
+I --> J[Render Dashboard]
+```
+
+## 🧠 State Management
+
+```mermaid
+flowchart LR
+
+Weather API
+
+-->
+
+Weather Service
+
+-->
+
+React State
+
+-->
+
+Navbar
+
+React State --> Weather Card
+
+React State --> Forecast
+
+React State --> Animated Background
+
+React State --> Search History
+```
+## 🚀 Deployment Pipeline
+
+```mermaid
+flowchart LR
+
+Developer
+
+-->
+
+Git Commit
+
+-->
+
+GitHub
+
+-->
+
+Vercel
+
+-->
+
+Production Build
+
+-->
+
+Weatherly
+
+Weatherly
+
+-->
+
+OpenWeather API
+```
