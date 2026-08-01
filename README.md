@@ -143,3 +143,117 @@ weather-app/
 - React Icons
 - OpenWeather API
 - Vercel
+
+# 🚀 Getting Started
+
+Follow these steps to set up the project locally.
+
+---
+
+## 1️⃣ Clone the Repository
+
+```bash
+git clone https://github.com/varunwalia120/weather-app.git
+```
+
+Navigate into the project directory.
+
+```bash
+cd weather-app
+```
+
+---
+
+## 2️⃣ Install Dependencies
+
+Using npm:
+
+```bash
+npm install
+```
+
+---
+
+## 3️⃣ Configure Environment Variables
+
+Create a `.env` file in the root directory.
+
+```env
+VITE_WEATHER_API_KEY=YOUR_OPENWEATHER_API_KEY
+```
+
+> **Note**
+>
+> Obtain a free API key from:
+>
+> https://openweathermap.org/api
+
+---
+
+## 4️⃣ Run the Development Server
+
+```bash
+npm run dev
+```
+
+The application will be available at:
+
+```
+http://localhost:5173
+```
+
+---
+
+## 5️⃣ Build for Production
+
+```bash
+npm run build
+```
+
+---
+
+## 6️⃣ Preview the Production Build
+
+```bash
+npm run preview
+```
+
+---
+
+# 🌐 Deployment
+
+This project is deployed on **Vercel**.
+
+Deployment process:
+
+1. Push the repository to GitHub.
+2. Import the repository into Vercel.
+3. Add the following Environment Variable.
+
+```env
+VITE_WEATHER_API_KEY=YOUR_OPENWEATHER_API_KEY
+```
+
+4. Redeploy the application.
+
+---
+
+# 📦 Available Scripts
+
+| Command | Description |
+|----------|-------------|
+| `npm install` | Install dependencies |
+| `npm run dev` | Start development server |
+| `npm run build` | Create production build |
+| `npm run preview` | Preview production build |
+| `npm run lint` | Run ESLint |
+
+---
+
+# 🔐 Environment Variables
+
+| Variable | Description |
+|----------|-------------|
+| `VITE_WEATHER_API_KEY` | OpenWeather API Key |
+
+> ⚠️ Never commit your `.env` file to GitHub.
