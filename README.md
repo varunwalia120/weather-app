@@ -498,3 +498,146 @@ D --> E
 E --> F
 F --> G
 ```
+
+# 🚀 Key Features
+
+## 🌍 Search Weather by City
+
+- Search weather information for any city worldwide.
+- Instant API requests with real-time updates.
+- Input validation and error handling for invalid cities.
+
+---
+
+## 📍 Current Location Detection
+
+- Uses the browser's Geolocation API.
+- Fetches weather automatically based on latitude and longitude.
+- Gracefully handles permission denial.
+
+---
+
+## 📅 5-Day Weather Forecast
+
+- Displays daily forecast cards.
+- Shows:
+  - Weather condition
+  - Minimum temperature
+  - Maximum temperature
+  - Weather icon
+  - Day of the week
+
+---
+
+## 🌤 Dynamic Background
+
+The application automatically changes its background according to the current weather.
+
+Examples:
+
+| Weather | Background |
+|---------|------------|
+| ☀️ Clear | Blue Sky |
+| ☁️ Clouds | Gray |
+| 🌧 Rain | Dark Blue |
+| ❄️ Snow | White |
+| ⛈ Thunderstorm | Purple |
+| 🌫 Mist | Fog Gray |
+
+---
+
+## 🌡 Detailed Weather Information
+
+Weatherly displays:
+
+- Temperature
+- Feels Like
+- Humidity
+- Wind Speed
+- Pressure
+- Visibility
+- Sunrise
+- Sunset
+
+---
+
+## 💾 Search History
+
+Recently searched cities are stored using Local Storage.
+
+Features include:
+
+- Duplicate removal
+- Maximum history limit
+- One-click search
+- Persistent storage
+
+---
+
+## 🌍 Unit Conversion
+
+Switch between:
+
+- Celsius (°C)
+- Fahrenheit (°F)
+
+without refreshing the application.
+
+---
+
+## ✨ Smooth Animations
+
+Built using Framer Motion.
+
+Animations include:
+
+- Page transitions
+- Hover effects
+- Weather icon animations
+- Background transitions
+- Forecast card animations
+
+---
+
+## 📱 Responsive Design
+
+Optimized for:
+
+- Desktop
+- Laptop
+- Tablet
+- Mobile
+
+# 💡 Design Decisions
+
+Several design choices were made to improve maintainability and user experience.
+
+### Why React?
+
+- Component-based architecture
+- Efficient rendering
+- Easy state management
+
+### Why TypeScript?
+
+- Type safety
+- Better IntelliSense
+- Reduced runtime bugs
+
+### Why Tailwind CSS?
+
+- Rapid UI development
+- Utility-first styling
+- Consistent design
+
+### Why Axios?
+
+- Cleaner API requests
+- Better error handling
+- Request configuration
+
+### Why Framer Motion?
+
+- Smooth animations
+- Modern user experience
+- Declarative animation API
