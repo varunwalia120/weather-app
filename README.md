@@ -641,3 +641,165 @@ Several design choices were made to improve maintainability and user experience.
 - Smooth animations
 - Modern user experience
 - Declarative animation API
+
+# 🛠️ Challenges Faced
+
+During the development of Weatherly, several technical challenges were encountered. Each challenge helped improve the application's architecture and overall development experience.
+
+---
+
+## 1. Integrating the OpenWeather API
+
+### Challenge
+
+Fetching real-time weather and forecast data while handling different API endpoints and response formats.
+
+### Solution
+
+- Created a dedicated weather service using Axios.
+- Added reusable functions for city-based and coordinate-based requests.
+- Implemented centralized error handling.
+
+---
+
+## 2. Managing API Errors
+
+### Challenge
+
+Users could enter invalid city names or experience API failures.
+
+### Solution
+
+Implemented custom error messages for:
+
+- Invalid city
+- Invalid API key
+- Network failure
+- Unknown errors
+
+---
+
+## 3. Geolocation Support
+
+### Challenge
+
+Obtaining the user's location while handling browser permissions.
+
+### Solution
+
+Used the Browser Geolocation API and displayed meaningful messages when permission was denied.
+
+---
+
+## 4. Search History Management
+
+### Challenge
+
+Preventing duplicate searches while keeping recent searches available.
+
+### Solution
+
+- Stored history using Local Storage.
+- Removed duplicates automatically.
+- Limited history to recent searches.
+
+---
+
+## 5. Forecast Data Processing
+
+### Challenge
+
+The OpenWeather Forecast API returns weather every 3 hours instead of one forecast per day.
+
+### Solution
+
+Processed the API response and grouped forecast entries to display a clean 5-day forecast.
+
+---
+
+## 6. Dynamic Background
+
+### Challenge
+
+Creating an immersive UI that changes with weather conditions.
+
+### Solution
+
+Mapped weather conditions to custom animated gradients using Framer Motion.
+
+---
+
+## 7. Deployment on Vercel
+
+### Challenge
+
+The application worked locally but returned **401 Unauthorized** after deployment.
+
+### Solution
+
+Configured the required environment variable in Vercel:
+
+```env
+VITE_WEATHER_API_KEY=YOUR_API_KEY
+```
+
+Redeployed the application to apply the updated environment variables.
+
+---
+
+## 8. Responsive UI
+
+### Challenge
+
+Maintaining a consistent layout across desktop, tablet, and mobile devices.
+
+### Solution
+
+Built the interface using Tailwind CSS responsive utilities and flexible layouts.
+
+# 📚 Lessons Learned
+
+This project helped strengthen my understanding of:
+
+- React component architecture
+- TypeScript interfaces and type safety
+- API integration using Axios
+- State management with React Hooks
+- Browser Geolocation API
+- Local Storage
+- Responsive UI development
+- Framer Motion animations
+- Environment variables
+- Vercel deployment
+- Debugging production issues
+- Organizing scalable frontend projects
+
+# 🎯 Skills Demonstrated
+
+### Frontend Development
+
+- React
+- TypeScript
+- Tailwind CSS
+- Responsive Design
+
+### API Integration
+
+- Axios
+- REST APIs
+- JSON Parsing
+
+### UI/UX
+
+- Framer Motion
+- Glassmorphism
+- Dynamic Themes
+- Animations
+
+### Development Practices
+
+- Component-Based Architecture
+- Code Reusability
+- Error Handling
+- Type Safety
+- Local Storage
